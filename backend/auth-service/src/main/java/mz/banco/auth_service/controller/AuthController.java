@@ -27,14 +27,14 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(
             @RequestBody Map<String, String> dados) {
-
         String email = dados.get("email");
         String password = dados.get("password");
 
         Funcionario funcionario = authService.autenticarFuncionario(email, password);
 
         String token = jwtService.gerarToken(
-                funcionario.getEmail());
+                funcionario.getEmail(),
+                funcionario.getRole().name());
 
         return ResponseEntity.ok(Map.of(
                 "mensagem", "Autenticacao realizada com sucesso!",

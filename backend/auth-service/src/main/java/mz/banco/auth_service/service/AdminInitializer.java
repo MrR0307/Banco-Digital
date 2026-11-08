@@ -1,5 +1,7 @@
 package mz.banco.auth_service.service;
 
+import mz.banco.auth_service.model.Funcionario;
+import mz.banco.auth_service.model.Role;
 import mz.banco.auth_service.repository.FuncionarioRepository;
 
 import org.springframework.boot.CommandLineRunner;
@@ -25,8 +27,26 @@ public class AdminInitializer {
                         email,
                         "Admin123!");
 
+                Funcionario admin = funcionarioRepository
+                        .findByEmail(email)
+                        .orElseThrow();
+
+                admin.setRole(Role.ADMINISTRADOR);
+
+                funcionarioRepository.save(admin);
+
                 System.out.println("Administrador criado com sucesso!");
+
             } else {
+
+                Funcionario admin = funcionarioRepository
+                        .findByEmail(email)
+                        .orElseThrow();
+
+                admin.setRole(Role.ADMINISTRADOR);
+
+                funcionarioRepository.save(admin);
+
                 System.out.println("Administrador ja existe.");
             }
         };

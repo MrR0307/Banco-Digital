@@ -22,8 +22,11 @@ public class Funcionario {
     @Column(nullable = false)
     private boolean estado = true;
 
-    public Funcionario() {
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.FUNCIONARIO;
 
+    public Funcionario() {
     }
 
     public long getId() {
@@ -66,4 +69,11 @@ public class Funcionario {
         this.estado = estado;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }

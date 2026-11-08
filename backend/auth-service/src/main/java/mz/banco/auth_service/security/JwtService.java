@@ -25,7 +25,7 @@ public class JwtService {
                 secret.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String gerarToken(String email) {
+    public String gerarToken(String email, String role) {
 
         Date agora = new Date();
 
@@ -34,6 +34,7 @@ public class JwtService {
 
         return Jwts.builder()
                 .subject(email)
+                .claim("role", role)
                 .issuedAt(agora)
                 .expiration(expiracao)
                 .signWith(getSigningKey())
@@ -43,6 +44,10 @@ public class JwtService {
     public String extrairEmail(String token) {
 
         return extrairClaims(token).getSubject();
+    }
+
+    public String extrairRole(String token) {
+        return extrairClaims(token).get("role", String.class);
     }
 
     public boolean validarToken(String token) {

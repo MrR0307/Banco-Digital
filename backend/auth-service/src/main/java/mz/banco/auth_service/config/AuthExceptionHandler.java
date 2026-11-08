@@ -21,4 +21,5 @@ public class AuthExceptionHandler {
                         "mensagem",
                         "Esta conta esta desativada."));
     }
+
 }

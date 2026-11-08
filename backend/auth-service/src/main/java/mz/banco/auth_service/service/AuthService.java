@@ -9,6 +9,8 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import mz.banco.auth_service.model.Role;
+
 @Service
 public class AuthService {
 
@@ -38,6 +40,7 @@ public class AuthService {
         funcionario.setEmail(email);
         funcionario.setPassword(passwordEncoder.encode(password));
         funcionario.setEstado(true);
+        funcionario.setRole(Role.FUNCIONARIO);
 
         return funcionarioRepository.save(funcionario);
     }
